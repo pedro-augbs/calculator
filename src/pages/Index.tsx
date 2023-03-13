@@ -126,7 +126,7 @@ export const Index = () => {
       md:w-96 md:h-auto"
       >
         <div
-          className="flex flex-col items-end px-5 py-10 rounded-t-3xl
+          className="flex flex-col items-end px-5 py-6 rounded-t-3xl
         md:w-96 md:h-auto"
         >
           <div className="h-10">
@@ -136,7 +136,7 @@ export const Index = () => {
           <span className="text-6xl text-lightlight">{currScrValue}</span>
         </div>
         <div
-          className="flex flex-col px-5 py-20 gap-2 w-full h-full bg-darkdark rounded-3xl
+          className="flex flex-col px-5 py-10 gap-2 w-full h-full bg-darkdark rounded-3xl
         md:w-96 md:h-auto"
         >
           <Buttons>
