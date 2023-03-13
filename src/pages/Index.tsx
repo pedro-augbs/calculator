@@ -6,10 +6,10 @@ interface ButtonsProps {
 }
 
 const styles = {
-  buttonPrim: "bg-lightlight text-darkdark",
-  buttonSec: "bg-gray-500 text-darkdark",
-  buttonAlt: "bg-blue-500 text-darkdark",
-  buttonSpc: "bg-lightlight grow text-darkdark",
+  buttonPrim: "bg-lightlight text-darkdark hover:opacity-50",
+  buttonSec: "bg-gray-500 text-darkdark hover:opacity-50",
+  buttonAlt: "bg-blue-500 text-darkdark hover:opacity-50",
+  buttonSpc: "bg-lightlight grow text-darkdark hover:opacity-50",
 };
 
 const OPERATIONS_MAP: any = {
