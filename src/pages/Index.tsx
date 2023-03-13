@@ -6,10 +6,17 @@ interface ButtonsProps {
 }
 
 const styles = {
-  buttonPrim: "bg-white",
-  buttonSec: "bg-gray-500",
-  buttonAlt: "bg-orange-500",
-  buttonSpc: "bg-white grow",
+  buttonPrim: "bg-lightlight text-darkdark",
+  buttonSec: "bg-gray-500 text-darkdark",
+  buttonAlt: "bg-blue-500 text-darkdark",
+  buttonSpc: "bg-lightlight grow text-darkdark",
+};
+
+const OPERATIONS_MAP: any = {
+  "/": (a: any, b: any) => a / b,
+  "*": (a: any, b: any) => a * b,
+  "-": (a: any, b: any) => a - b,
+  "+": (a: any, b: any) => a + b,
 };
 
 export const Index = () => {
@@ -18,6 +25,7 @@ export const Index = () => {
   const [signal, setSignal] = useState("");
 
   const write = (button: any) => {
+    console.log("signal", signal);
     const del = () => {
       if (currScrValue.length > 1) {
         setCurrScrValue(currScrValue.slice(0, -1));
@@ -35,9 +43,29 @@ export const Index = () => {
     };
 
     const insertSymbol = (symbol: string) => {
-      setSignal(symbol);
-      setPrevScrValue(currScrValue);
-      setCurrScrValue("0");
+      if (signal === "") {
+        setSignal(symbol);
+        setPrevScrValue(currScrValue);
+        setCurrScrValue("0");
+      } else {
+        const isValidCalc =
+          currScrValue != "" && prevScrValue != "" && signal != "";
+        console.log(isValidCalc);
+        if (!isValidCalc) return;
+
+        console.log(currScrValue, prevScrValue, signal);
+
+        const result = String(
+          OPERATIONS_MAP[signal](
+            parseFloat(prevScrValue),
+            parseFloat(currScrValue)
+          )
+        );
+        console.log(result);
+        setPrevScrValue(result);
+        setCurrScrValue("");
+        setSignal(symbol);
+      }
     };
 
     const SYMBOL_MAP: any = {
@@ -54,14 +82,9 @@ export const Index = () => {
     function doCalc() {
       const isValidCalc =
         currScrValue != "" && prevScrValue != "" && signal != "";
+      console.log(isValidCalc);
       if (!isValidCalc) return;
 
-      const OPERATIONS_MAP: any = {
-        "/": (a: any, b: any) => a / b,
-        "*": (a: any, b: any) => a * b,
-        "-": (a: any, b: any) => a - b,
-        "+": (a: any, b: any) => a + b,
-      };
       console.log(currScrValue, prevScrValue, signal);
 
       const result = String(
@@ -93,16 +116,29 @@ export const Index = () => {
   };
 
   return (
-    <section className="w-screen h-screen bg-white flex items-center justify-center">
-      <div className="flex flex-col w-96 bg-cyan-500 px-5 py-20 rounded-3xl gap-40">
-        <div className="flex flex-col items-end text-white">
+    <section
+      className="w-screen h-screen flex items-center justify-centerbg-dark
+        md:bg-blue-500"
+    >
+      <div
+        className="flex flex-col w-96 bg-dark rounded-3xl
+      sm:h-screen
+      md:w-96 md:h-auto"
+      >
+        <div
+          className="flex flex-col items-end px-5 py-10 rounded-t-3xl
+        md:w-96 md:h-auto"
+        >
           <div className="h-10">
-            <span className="text-4xl text-gray-500">{prevScrValue}</span>
-            <span className="text-4xl text-gray-500">{signal}</span>
+            <span className="text-4xl text-medium">{prevScrValue}</span>
+            <span className="text-4xl text-medium">{signal}</span>
           </div>
-          <span className="text-6xl">{currScrValue}</span>
+          <span className="text-6xl text-lightlight">{currScrValue}</span>
         </div>
-        <div className="flex flex-col gap-2">
+        <div
+          className="flex flex-col px-5 py-20 gap-2 w-full h-full bg-darkdark rounded-3xl
+        md:w-96 md:h-auto"
+        >
           <Buttons>
             <Button rest={styles.buttonSec} onClick={write}>
               C
