@@ -117,7 +117,7 @@ export const Index = () => {
 
   return (
     <section
-      className="w-screen h-screen flex items-center justify-centerbg-dark
+      className="w-screen h-screen flex items-center justify-center bg-dark
         md:bg-blue-500"
     >
       <div
