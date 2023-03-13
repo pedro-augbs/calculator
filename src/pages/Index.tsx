@@ -63,7 +63,7 @@ export const Index = () => {
         );
         console.log(result);
         setPrevScrValue(result);
-        setCurrScrValue("");
+        setCurrScrValue("0");
         setSignal(symbol);
       }
     };
