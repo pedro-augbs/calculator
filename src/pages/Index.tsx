@@ -13,7 +13,12 @@ const styles = {
 };
 
 const OPERATIONS_MAP: any = {
-  "/": (a: any, b: any) => a / b,
+  "/": (a: any, b: any) => {
+    if (b == 0) {
+      return 0;
+    }
+    a / b;
+  },
   "*": (a: any, b: any) => a * b,
   "-": (a: any, b: any) => a - b,
   "+": (a: any, b: any) => a + b,
@@ -25,7 +30,6 @@ export const Index = () => {
   const [signal, setSignal] = useState("");
 
   const write = (button: any) => {
-    console.log("signal", signal);
     const del = () => {
       if (currScrValue.length > 1) {
         setCurrScrValue(currScrValue.slice(0, -1));
@@ -50,10 +54,7 @@ export const Index = () => {
       } else {
         const isValidCalc =
           currScrValue != "" && prevScrValue != "" && signal != "";
-        console.log(isValidCalc);
         if (!isValidCalc) return;
-
-        console.log(currScrValue, prevScrValue, signal);
 
         const result = String(
           OPERATIONS_MAP[signal](
@@ -61,7 +62,6 @@ export const Index = () => {
             parseFloat(currScrValue)
           )
         );
-        console.log(result);
         setPrevScrValue(result);
         setCurrScrValue("");
         setSignal(symbol);
@@ -82,10 +82,7 @@ export const Index = () => {
     function doCalc() {
       const isValidCalc =
         currScrValue != "" && prevScrValue != "" && signal != "";
-      console.log(isValidCalc);
       if (!isValidCalc) return;
-
-      console.log(currScrValue, prevScrValue, signal);
 
       const result = String(
         OPERATIONS_MAP[signal](
@@ -93,7 +90,6 @@ export const Index = () => {
           parseFloat(currScrValue)
         )
       );
-      console.log(result);
       setCurrScrValue(result);
       setPrevScrValue("");
       setSignal("");
@@ -133,9 +129,7 @@ export const Index = () => {
             <span className="text-4xl text-medium">{prevScrValue}</span>
             <span className="text-4xl text-medium">{signal}</span>
           </div>
-            <span className="text-6xl h-14 text-lightlight">
-              {currScrValue}
-            </span>
+          <span className="text-6xl h-14 text-lightlight">{currScrValue}</span>
         </div>
         <div
           className="flex flex-col px-5 py-10 gap-2 w-full h-full bg-darkdark rounded-3xl
