@@ -21,7 +21,7 @@ const OPERATIONS_MAP: any = {
 
 export const Index = () => {
   const [currScrValue, setCurrScrValue] = useState("0");
-  const [prevScrValue, setPrevScrValue] = useState("0");
+  const [prevScrValue, setPrevScrValue] = useState("");
   const [signal, setSignal] = useState("");
 
   const write = (button: any) => {
@@ -46,7 +46,7 @@ export const Index = () => {
       if (signal === "") {
         setSignal(symbol);
         setPrevScrValue(currScrValue);
-        setCurrScrValue("0");
+        setCurrScrValue("");
       } else {
         const isValidCalc =
           currScrValue != "" && prevScrValue != "" && signal != "";
@@ -63,7 +63,7 @@ export const Index = () => {
         );
         console.log(result);
         setPrevScrValue(result);
-        setCurrScrValue("0");
+        setCurrScrValue("");
         setSignal(symbol);
       }
     };
@@ -133,7 +133,9 @@ export const Index = () => {
             <span className="text-4xl text-medium">{prevScrValue}</span>
             <span className="text-4xl text-medium">{signal}</span>
           </div>
-          <span className="text-6xl text-lightlight">{currScrValue}</span>
+            <span className="text-6xl h-14 text-lightlight">
+              {currScrValue}
+            </span>
         </div>
         <div
           className="flex flex-col px-5 py-10 gap-2 w-full h-full bg-darkdark rounded-3xl
