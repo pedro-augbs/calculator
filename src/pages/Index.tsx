@@ -43,10 +43,15 @@ export const Index = () => {
     };
 
     const insertSymbol = (symbol: string) => {
-      if (signal === "") {
+      console.log(currScrValue, signal)
+      if (signal !== "" && currScrValue === "") {
+        setSignal(symbol);
+        return;
+      } else if (signal === "") {
         setSignal(symbol);
         setPrevScrValue(currScrValue);
         setCurrScrValue("");
+        return;
       } else {
         const isValidCalc =
           currScrValue != "" && prevScrValue != "" && signal != "";
@@ -133,9 +138,7 @@ export const Index = () => {
             <span className="text-4xl text-medium">{prevScrValue}</span>
             <span className="text-4xl text-medium">{signal}</span>
           </div>
-            <span className="text-6xl h-14 text-lightlight">
-              {currScrValue}
-            </span>
+          <span className="text-6xl h-14 text-lightlight">{currScrValue}</span>
         </div>
         <div
           className="flex flex-col px-5 py-10 gap-2 w-full h-full bg-darkdark rounded-3xl
